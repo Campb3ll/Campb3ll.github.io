@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruimte</title>
+        <style>
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        label, input, select {
+            margin-right: 10px;
+        }
+        .image-preview {
+            display: none;
+            margin-top: 10px;
+            width: 100px;
+            height: auto;
+        }
+    </style>
 </head>
 <body bgcolor=#f5f542>
     <h1>Ruimtes</h1>
@@ -16,11 +32,33 @@
         <label for="tijd">Selecteer een tijd:</label>
             <input type="time" id="tijd" name="tijd">
         <label for="kamers">Kies een kamer:</label>
-        <select id="kamers" name="kamers">
-            <option value="kamer1">Achterkamer Rechts</option>
-            <option value="kamer2">Achterkamer Links</option>
-            <option value="kamer3">Inloopruimte</option>
+ <label for="kamers">Kies een kamer:</label>
+        <select id="kamers" name="kamers" onmouseover="showImage(event)" onmouseout="hideImage()">
+            <option value="kamer1" data-image="image1.jpg">Achterkamer Rechts</option>
+            <option value="kamer2" data-image="image2.jpg">Achterkamer Links</option>
+            <option value="kamer3" data-image="image3.jpg">Inloopruimte</option>
         </select>
+        <img id="preview" class="image-preview" src="" alt="Image Preview">
     </form>
+
+        <script>
+        function showImage(event) {
+            const option = event.target;
+            if (option.tagName === 'OPTION') {
+                const imageSrc = option.getAttribute('data-image');
+                const preview = document.getElementById('preview');
+                preview.src = imageSrc;
+                preview.style.display = 'block';
+            }
+        }
+
+        function hideImage() {
+            const preview = document.getElementById('preview');
+            preview.style.display = 'none';
+        }
+
+        document.getElementById('kamers').addEventListener('mouseover', showImage);
+        document.getElementById('kamers').addEventListener('mouseout', hideImage);
+    </script>
 </body>
 </html>
