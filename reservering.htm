@@ -1,20 +1,59 @@
-<html>
-  <head>
-    <title>ruimte reserveringen </title>
-  </head>
-  <body>
-    <table>
-      <tr>
-        <td>
-          <img src="maan1.jpeg"> 
-        </td>
-        <td>
-          <img src="maan2.jpeg"> 
-        </td>
-        <td> 
-          <img src="maan4.jpg">
-        </td>       
-      </tr>
-    </table>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruimte</title>
+    <style>
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        label, input, select {
+            margin-right: 10px;
+        }
+        .image-preview {
+            display: none;
+            margin-top: 10px;
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body bgcolor="#f5f542">
+    <h1>Ruimtes</h1>
+    <p>In de Nieuwe Maan is het ook mogelijk om ruimtes te huren via de gastheer of gastvrouw. Aan het reserveren/huren van deze ruimten zijn voorwaardes verbonden</p>
+    
+    <form>
+        <label for="date">Selecteer een datum:</label>
+        <input type="date" id="date" name="date">
+        <label for="tijd">Selecteer een tijd:</label>
+        <input type="time" id="tijd" name="tijd">
+        <label for="kamers">Kies een kamer:</label>
+        <select id="kamers" name="kamers" onchange="showImage()">
+            <option value="kamer1" data-image="https://campb3ll.github.io/maan4.jpg">Achterkamer Rechts</option>
+            <option value="kamer2" data-image="https://campb3ll.github.io/maan2.jpeg">Achterkamer Links</option>
+            <option value="kamer3" data-image="https://campb3ll.github.io/maan1.jpeg">Inloopruimte</option>
+        </select>
+        <img id="preview" class="image-preview" src="" alt="Image Preview">
+    </form>
+
+    <script>
+        function showImage() {
+            const select = document.getElementById('kamers');
+            const selectedOption = select.options[select.selectedIndex];
+            const imageSrc = selectedOption.getAttribute('data-image');
+            const preview = document.getElementById('preview');
+            if (imageSrc) {
+                preview.src = imageSrc;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        document.getElementById('kamers').addEventListener('change', showImage);
+    </script>
+</body>
 </html>
